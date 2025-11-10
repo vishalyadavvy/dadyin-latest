@@ -75,7 +75,7 @@
             <!--  {{ "(" + (this.productTypes.value?.length ?? 0) + "/" + (this.productTypes.value?.length ?? 0) + ")" }} -->
           </div>
         </div>
-        <div class="card-body prod-bg">
+        <div class="card-body ">
           <ul class="types">
             <ng-container *ngIf="!this.productTypes.value?.length; else noDataFound1">
               <div class="data-not-found">
@@ -104,7 +104,7 @@
             }}
           </div>
         </div>
-        <div class="card-body prod-bg">
+        <div class="card-body">
           <ul class="types">
             <ng-container *ngIf="!this.productSubTypes.value?.length; else noDataFound2">
               <div class="data-not-found">
@@ -132,7 +132,7 @@
             Products Associated with this template
           </div>
         </div>
-        <div class="card-body prod-bg">
+        <div class="card-body">
           <ul class="types">
             <ng-container *ngIf="!this.productSubTypes.value?.length; else noDataFound2">
               <div class="data-not-found">
