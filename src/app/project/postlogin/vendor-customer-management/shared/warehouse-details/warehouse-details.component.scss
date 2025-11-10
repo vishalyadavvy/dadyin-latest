@@ -1,0 +1,68 @@
+.app-content {
+	height: calc(100vh - 200px);
+	overflow-y: scroll !important;
+	margin: 5px 0;
+}
+
+.process-table table thead tr th {
+	color: var(--text-primary);
+	font-weight: 600 !important;
+
+	tbody tr td {
+		text-align: -webkit-center;
+	}
+}
+
+.copylink {
+	::ng-deep button {
+		padding: 0px;
+		position: relative;
+		right: 1px;
+
+		img {
+			height: 28px;
+			position: relative;
+			bottom: 1px;
+		}
+	}
+}
+
+mat-expansion-panel {
+	background: #fff;
+	border-radius: 0;
+	border: 1px solid #dfedfb;
+	margin-bottom: 2px;
+	box-shadow: none !important;
+	margin-top: 5px;
+
+	mat-expansion-panel-header {
+		background: var(--card-header-bg) !important;
+		padding: 0 20px !important;
+		height: 40px;
+		width: 100%;
+
+		&:hover,
+		&:focus {
+			background: var(--card-header-bg);
+			color: var(--card-header-color);
+		}
+
+		mat-panel-description {
+			display: flex;
+			justify-content: center;
+			text-align: center;
+			align-items: center;
+			margin: 0;
+			padding: 0;
+
+			p {
+				color: black !important;
+				text-align: center;
+				margin: 0;
+				padding: 0;
+				font-weight: 500 !important;
+			}
+		}
+	}
+}
+

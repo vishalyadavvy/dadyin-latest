@@ -1,0 +1,93 @@
+<div class="p-2" [formGroup]="reminderForm">
+  <div class="title-text text-center">
+    <h2>Add Reminder</h2>
+  </div>
+  <div>
+    <div class="table-responsive process-table">
+      <table id="example" class="table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Details</th>
+            <th style="width: 150px !important">Time</th>
+            <th style="width: max-content">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container>
+            <tr>
+              <td style="height: unset !important">
+                <input
+                  style="height: unset !important"
+                  class="b-light"
+                  type="text"
+                  formControlName="reminderDetails"
+                />
+              </td>
+              <td>
+                <input
+                  type="datetime-local"
+                  style="height: unset !important"
+                  class="b-light"
+                  [min]="minDateTime"
+                  formControlName="reminderTime"
+                />
+              </td>
+              <td>
+                <i
+                  matTooltip="Add Reminder"
+                  class="material-icon mx-1"
+                  (click)="addReminder()"
+                  >save</i
+                >
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <div
+      class="table-responsive process-table my-2"
+      style="max-height: 400px; overflow: auto"
+    >
+      <table id="example" class="table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Details</th>
+            <th style="width: 150px !important">Time</th>
+            <th style="width: max-content"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of data?.reminders">
+            <tr>
+              <td>
+                <div>{{ item?.reminderDetails }}</div>
+              </td>
+              <td>
+                <div>
+                  {{ item?.reminderTime | date : "dMMMyy h:mm a" : "UTC" }}
+                </div>
+              </td>
+              <td></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="text-center mt-2">
+    <dadyin-button
+      label="Save"
+      (click)="addReminder()"
+      [theme]="'primary'"
+    ></dadyin-button
+    >&nbsp;
+    <dadyin-button
+      label="Close"
+      (click)="close()"
+      [theme]="'danger'"
+    ></dadyin-button
+    >&nbsp;
+  </div>
+</div>

@@ -1,0 +1,17 @@
+button {
+    color: #133275;
+    background-color: #F1F5F9;
+    border-radius: 0;
+    border: 1px solid var(--border-color-1);
+    height: 38px;
+    display: inline-flex;
+    justify-content: space-around;
+    flex-direction: inherit;
+    width: 10%;
+}
+
+.isactive {
+    color: #F1F5F9 !important;
+    background-color: #133275 !important;
+}
+

@@ -1,0 +1,41 @@
+.bg-grey {
+  background: #d8d8d8 !important;
+}
+
+.bg-lightgrey {
+  background: #f0f0f0 !important;
+}
+
+.tab-top {
+  .title-text {
+    line-height: 2.5;
+    padding: 5px 10px 5px 10px;
+  }
+}
+.status{
+  border-radius: 30px;
+  text-transform: capitalize;
+}
+.status-sent{
+  color: #0d6efd;
+  background-color: #cfe2ff;
+}
+.status-draft{
+  color: #6c757d;
+  background-color: #e2e3e5;
+}
+.status-confirmed{
+  color: #0ca523;
+  background-color: #dbffd6;
+}
+.status-rejected{
+  color: #dc3545;
+  background-color: #f8d7da;
+}
+.bg-light-text{
+  color: #9da2b4;
+}
+.border-l-light{
+  border-left: 1px solid var(--light-text-color);
+  padding-left: 8px;
+}

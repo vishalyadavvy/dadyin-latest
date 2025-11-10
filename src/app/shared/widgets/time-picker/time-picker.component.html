@@ -1,0 +1,32 @@
+<!-- <div [class]="class">
+  <mat-form-field fxFlexLay appearance="fill">
+    <mat-label>{{label}}</mat-label>
+    <input *ngIf="control" matInput [formControl]="control" class="input" placeholder="{{placeholder}}"
+      [format]="format" [name]="formControlName" (timeChanged)="writeValue($event)" [ngxTimepicker]="toggleTimepicker"
+      readonly>
+    <ngx-material-timepicker-toggle [for]="toggleTimepicker" mat-icon-button matSuffix></ngx-material-timepicker-toggle>
+    <mat-hint align="start">{{leftHint}}</mat-hint>
+    <mat-hint align="end">{{rightHint}}</mat-hint>
+    <mat-error *ngIf="showFieldError()">{{getFieldErrorDesc()}}</mat-error>
+  </mat-form-field>
+
+  <ngx-material-timepicker #toggleTimepicker [theme]="darkTheme" [minutesGap]="minutesGap" [enableKeyboardInput]=true>
+  </ngx-material-timepicker>
+</div> -->
+<div [class]="class">
+  <mat-label class="time-picker-label">{{label}}</mat-label>
+  <ng-container *ngIf="value">
+    <ngx-timepicker-field [disabled]=false [clockTheme]="darkTheme" [format]="format" [defaultTime]="value.toString()"
+      (timeChanged)="writeValue($event)">
+    </ngx-timepicker-field>
+  </ng-container>
+  <ng-container *ngIf="!value">
+    <ngx-timepicker-field [disabled]=false [clockTheme]="darkTheme" [format]="format" (timeChanged)="writeValue($event)"
+      defaultValue="">
+    </ngx-timepicker-field>
+  </ng-container>
+  <mat-hint class="time-picker-label" align="start" *ngIf="!getFieldErrorDesc()">{{leftHint}}</mat-hint>
+  <mat-error class="time-picker-label" *ngIf="control.dirty && control.invalid && getFieldErrorDesc()">
+    {{getFieldErrorDesc()}}</mat-error>
+  <input [formControl]="control" type="hidden" [name]="formControlName" />
+</div>

@@ -1,0 +1,303 @@
+<form [formGroup]="process" class="xx">
+  <mat-expansion-panel class="panel-no-padding my-2" [expanded]="(isExpanded)" #mep="matExpansionPanel">
+    <mat-expansion-panel-header class="raw-material">
+      <div class="header w-100  p-0">
+        <div class="title width-perc-40">
+          <div style="text-wrap: nowrap;" class="d-flex align-items-center text-black font-size-14 ">
+            <span class="me-3 text-black">Raw Material Details</span>
+
+            <ng-container *ngIf="getprocessProducts.controls?.length==0">
+            <dadyin-button (clicked)="addNewProcessProductControl()" [theme]="'borderless-primary'" type='image'
+            [class]="'hw20'"
+                     [typeval]="'assets/nicons/add-white.png'" [isDisabled]="process?.disabled ">
+                    </dadyin-button>
+            </ng-container>
+          </div>
+          <div class="output d-flex w-100 border-l-light" formGroupName="productOfProcess">
+            <div class="w-100 mx-2" formGroupName="productMeta">
+              <input class="w-100" autocomplete="off" (click)="$event.stopImmediatePropagation()"
+                (keydown.Space)="$event.stopImmediatePropagation()" type="text"
+                style="width: 200px !important;"
+                placeholder="Enter Product of Process Name" formControlName="description" />
+            </div>
+         <!--    <div class="w-100 mx-2" formGroupName="productMeta">
+              <input class="w-100" autocomplete="off" (click)="$event.stopImmediatePropagation()"
+                (keydown.Space)="$event.stopImmediatePropagation()" type="text" placeholder="Enter Product Code"
+                formControlName="productCode" />
+            </div> -->
+            <select class="b-round" (click)="$event.stopImmediatePropagation()" id="type"
+              [ngClass]="{'b-red': getProductOfProcessAttribute('productTypeId').invalid && getProductOfProcessAttribute('productTypeId')?.touched}"
+              formControlName="productTypeId">
+              <option disabled selected [value]="null"> Select Product Type</option>
+              <ng-container *ngFor="let p of apiService.productTypes">
+                <option [value]="p.id">{{ p.description }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
+        <div class="optional-values">
+          <div class="units">
+            <div class="w-100 mx-2 text-black">Total Waste %: </div>
+            <input (click)="$event.stopImmediatePropagation()" style="min-width: 40px;max-width: 100px;" type="number"
+              class="w-100 h-20" formControlName="processWastePercent" (change)="calculateValues()">
+            <div class="">
+              <select (click)="$event.stopImmediatePropagation()" (change)="onSelectOption($event)"
+              style="background-color: var(--body-bg);"
+                class=" text-white h-20">
+                <ng-container *ngFor="let option of processCalculatorOptions.controls;let k=index">
+                  <option [selected]="option.get('isSelected').value" [value]="option.get('name').value">
+                    {{option.get('name').value}}</option>
+                </ng-container>
+              </select>
+            </div>
+          <!--   <div class="mx-2 text-black">Cost: </div> -->
+            <div class="currency-value ms-2">
+              <span class="text-black" >{{ (getprocessProducts.controls?.length>0) ? alltotalCostUomValue : 0}}</span>
+              <span>{{ (getprocessProducts.controls?.length>0) ? alltotalCostValueValue : ''}}</span>
+            </div>
+            <div class="unit-value">
+              <select (click)="$event.stopImmediatePropagation()" (change)="calculateValues()"
+              class="text-black"
+                [formControl]="totalCostUom">
+                <option value="" disabled selected>Select Uom</option>
+                <ng-container *ngFor="let i of uomService?.availableMatricCostUoms">
+                  <option [value]="i.description">{{ i.description }}</option>
+                </ng-container>
+              </select>
+              <span>{{ convertedTotalCost.value }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <section class="section-card material-cost-calculation">
+
+
+        <ng-container>
+          <div class="process-table ">
+            <!-- Material Cost -->
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:20px;"></th>
+                  <th>Product Type</th>
+                  <th>Product</th>
+                  <th>
+                    <div class="group">
+                      <span>Price </span>
+                      ({{priceUom?.value}})
+                    </div>
+                  </th>
+                  <th>
+                    <div class="group">
+                      <span>Density </span>
+                      ({{densityUom?.value}})
+                    </div>
+                  </th>
+                  <th>%USED ({{sumOfUsedPercent}}/100%)</th>
+                  <th>%Waste</th>
+                  <th>
+                    <div class="group">
+                      <span>AVG. Density </span>
+                      ({{avgDensityUom?.value}})
+                    </div>
+                  </th>
+                  <th>
+                    <div class="group">
+                      <span>Cost Addon </span>
+                      ({{costAddOnUom?.value}})
+                    </div>
+                  </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!--   <tr *ngIf="getprocessProducts.controls?.length==0">
+                  <th style="width:20px;"></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>
+                    <dadyin-button (clicked)="addNewProcessProductControl()" [theme]="'borderless-primary'" type='image'
+                     [typeval]="'assets/nicons/add-white.png'" [isDisabled]="process?.disabled ">
+                    </dadyin-button>
+                  </th>
+                </tr> -->
+                <ng-container [formGroup]="processproduct"
+                  *ngFor="let processproduct of getprocessProducts.controls; let i = index; trackBy: trackByFn">
+                  <tr>
+                    <td style="width:20px;"></td>
+                    <td>
+                      <select [ngClass]="{'b-red': !processproduct.get('productTypeId').value}" name="id"
+                        formControlName="productTypeId" (change)="resetProduct(i)">
+                        <option value="null" disabled selected>
+                          Select Product Type
+                        </option>
+                        <ng-container *ngFor="let type of this.apiService.productTypes">
+                          <ng-container *ngIf="getProductsListCount(type)>0">
+                            <option [value]="type.id">{{ type.description }}</option>
+                          </ng-container>
+                        </ng-container>
+                      </select>
+                    </td>
+                    <td>
+                      <select [ngClass]="{'b-red': !processproduct.get('subProductId').value}"
+                        formControlName="subProductId" (change)="getProductData($event, i)">
+                        <option value="null" disabled selected>Select Product</option>
+                        <ng-container *ngFor="let type of getFilteredProductsList(i)">
+                          <option [value]="type.id">{{ type.description }}</option>
+                        </ng-container>
+                      </select>
+                    </td>
+                    <td formGroupName="subProductMetricCost">
+                      <input (change)="calculateValues()" type="number" min="0" formControlName="attributeValue"
+                        style="color: #169474 !important" />
+                    </td>
+                    <td formGroupName="subProductDensity">
+                      <input (change)="calculateValues()" type="number" min="0" formControlName="attributeValue" />
+                    </td>
+                    <td>
+                      <input (change)="calculateValues()" type="number" min="0"
+                        [ngClass]="{'b-red': !checkIfusedPercentSum()}" formControlName="usedPercent"
+                        style="color: #3485ed !important" />
+                    </td>
+                    <td>
+                      <input (change)="calculateValues()" type="number" min="0" formControlName="wastePercent" />
+                    </td>
+                    <td formGroupName="density">
+                      <input (change)="calculateValues()" type="string" formControlName="attributeValue" readonly />
+                    </td>
+                    <td formGroupName="metricCost">
+                      <input (change)="calculateValues()" type="string" formControlName="attributeValue" readonly />
+                    </td>
+                    <td class="actions">
+
+                      <dadyin-button (clicked)="removeProcessProduct(i)" [theme]="'borderless-danger'" type='icon'
+                        [typeval]="'delete_outline'" [isDisabled]="process?.disabled">
+                      </dadyin-button>
+                      <ng-container *ngIf="getprocessProducts.controls?.length==i+1">
+                        <dadyin-button (clicked)="addNewProcessProductControl()" [theme]="'borderless-primary'"
+                          type='image'  [typeval]="'assets/nicons/add-white.png'"
+                          [isDisabled]="process?.disabled || getprocessProducts?.invalid">
+                        </dadyin-button>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+
+
+
+      </section>
+    </ng-template>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="panel-no-padding my-2" [expanded]="(isExpanded)" #mep="matExpansionPanel">
+    <mat-expansion-panel-header class="raw-material">
+      <div class=" grid-panel header w-100 p-0">
+        <div class="title">
+          <span class="text-black me-3" >Conversion Costs</span>
+          <dadyin-button (clicked)="addNewProcessConversionTypeControl();$event.stopImmediatePropagation()"
+            [theme]="'borderless-primary'" type='image'   [typeval]="'assets/nicons/add-white.png'"
+            [isDisabled]="process?.disabled  || getProcessConversionTypes?.invalid">
+          </dadyin-button>
+        </div>
+        <div></div>
+        <div class="optional-values">
+          <div class="units">
+            <div class="currency-value ">
+              <span class="text-black" >{{process.get('conversionMetricCost').get('userConversionUom').value}}</span>
+              <span>{{ process.get('conversionMetricCost').get('attributeValue').value }}</span>
+            </div>
+            <div class="unit-value">
+              <select class="text-black" (change)="calculateValues()" style="text-decoration: underline !important"
+                [formControl]="conversionCostUom">
+                <option value="" disabled selected>Select Uom</option>
+                <ng-container *ngFor="let i of uomService?.availableMatricCostUoms">
+                  <option [value]="i.description">{{ i.description }}</option>
+                </ng-container>
+              </select>
+              <span>{{ this.convertedConversionCost.value }}</span>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <section class="section-card conversion-cost-calculation">
+        <section class="conversionCost">
+          <ul>
+            <ng-container *ngFor="
+                let conversiontype of getProcessConversionTypes.controls;
+                let i = index; trackBy: trackByFn
+                first as isFirst;
+                last as isLast
+              ">
+              <li style="width: 350px;">
+                <div class="cnvrsn-frm">
+                  <select (change)="calculateValues()" name="conversionTypeId" class="conversion-cost" [formControl]="
+                      getConversionTypeAttribute(i, 'conversionTypeId')
+                    " [ngClass]="{'b-red': getConversionTypeAttribute(i, 'conversionTypeId')?.invalid}">
+                    <option selected disabled [value]="null">Select Conversion Type</option>
+                    <ng-container *ngFor="let type of getConversionTypesList()">
+                      <option [value]="type.id">{{ type.description }}</option>
+                    </ng-container>
+                  </select>
+                  <input (change)="calculateValues()"
+                    [ngClass]="{'b-red': getConversionTypeAttributeValue(i, 'metricCost')?.invalid}" type="number"
+                    class="currency" [formControl]="getConversionTypeAttributeValue(i, 'metricCost')" />
+
+                  <select (change)="calculateValues()" class="unit"
+                  style="background-color: var(--body-bg);"
+                    [ngClass]="{'b-red': getConversionTypeUserConversionUom(i, 'metricCost')?.invalid}"
+                    [formControl]="getConversionTypeUserConversionUom(i, 'metricCost')">
+                    <option value="" disabled selected> Select uom</option>
+                    <ng-container *ngFor="let i of uomService?.availableMatricCostUoms">
+                      <option [value]="i.description">
+                        {{ i.description }}
+                      </option>
+                    </ng-container>
+                  </select>
+                    <div class="delete-btn">
+                <dadyin-button (clicked)="removeConversion(i)" 
+                 [theme]="'borderless-primary'"
+                  type='image'
+                     [typeval]="'assets/nicons/delete.png'"
+                   [isDisabled]="process?.disabled">
+                </dadyin-button>
+                </div>
+                <div class="add-btn">
+                      <dadyin-button  (clicked)="addNewProcessConversionTypeControl();$event.stopImmediatePropagation()"
+                      [isDisabled]="process?.disabled  || getProcessConversionTypes?.invalid"
+                 [theme]="'borderless-primary'"
+                  type='image'
+                    [typeval]="'assets/nicons/add-white.png'">
+                </dadyin-button>
+                </div>
+                </div>
+              
+              </li>
+            </ng-container>
+
+          </ul>
+        </section>
+      </section>
+    </ng-template>
+  </mat-expansion-panel>
+
+</form>

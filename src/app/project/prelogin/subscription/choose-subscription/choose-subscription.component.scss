@@ -1,0 +1,177 @@
+.payment-section {
+    .attribute-input {
+        .mat-icon {
+            height: unset !important;
+            width: unset !important;
+            font-size: 14px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+
+    .cancel-icon {
+        color: #9DA2B4;
+        font-weight: 500;
+    }
+
+    .pricing {
+        display: flex;
+        align-items: start;
+        gap: .5rem;
+    }
+
+    .pricing-text {
+        color: #1E1E25;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .helping-text {
+        font-weight: 600;
+        font-size: 12px;
+        color: #6F7180;
+    }
+
+    .total-payable {
+        border: 2px solid #0065F4;
+        align-items: center;
+        padding: 0 1rem;
+        border-radius: 10px;
+    }
+
+    .info-icon {
+        font-size: 0.875rem;
+        margin-left: .5rem;
+        color: #6F7180;
+    }
+
+    .payment-amount {
+        color: #05082B;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .setup-cost-logo {
+        margin-bottom: 2rem;
+    }
+
+    .total-payable-text {
+        color: #6F7180;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .payment-container {
+        background-color: #FFFFFF;
+        border: 1.5px solid #D5E7FA;
+        box-shadow: 4px 4px 100px 5px #9DA2B433;
+        width: 100%;
+        height: 680px;
+        opacity: 1;
+        border-radius: 10px;
+        border-width: 1.5px;
+        padding: 2rem;
+        cursor: pointer;
+    }
+
+    .cost-info {
+        margin: 2rem 0;
+    }
+
+    .cost {
+        font-size: 40px;
+        font-weight: bold;
+        color: #05082B;
+    }
+
+    .subtext {
+        font-size: 12px;
+        font-weight: 500;
+        color: #6F7180;
+    }
+
+    .setup-cost {
+        font-size: 14px;
+        font-weight: 600;
+        color: #05082B;
+    }
+
+    .setup-text,
+    .info-text {
+        color: #9DA2B4;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .info-text {
+        margin-bottom: 2rem;
+        height: 70px;
+    }
+
+    .payment-button {
+        background-color: #E6F0FE;
+        width: 251px;
+        height: 50px;
+        border-radius: 10px;
+        color: #40424D;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        border-color: #E6F0FE;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .image-tick {
+        height: 15px;
+        width: 15px;
+    }
+
+    .border {
+        width: 251px;
+        border-width: 1px !important;
+        border: 1px solid #D5E7FA !important;
+        margin-bottom: 1.25rem;
+    }
+
+    .key-title {
+        color: #40424D;
+        font-size: 14px;
+        color: #40424D;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .key-list {
+        color: #9DA2B4;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .selected-payment {
+        border: 3px solid #0065F4;
+    }
+
+    .popular {
+        position: relative;
+
+        .popular-text {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0065F4;
+            color: #fff;
+            padding: 4px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+}

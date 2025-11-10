@@ -1,0 +1,129 @@
+/* Tooltip Styles */
+.custom-tooltip {
+  max-width: 400px !important;
+  width: 400px !important;
+  z-index: 9999 !important;
+}
+
+.custom-tooltip .tooltip-inner {
+  max-width: 400px !important;
+  width: 400px !important;
+  padding: 0 !important;
+  background: #fff !important;
+  border: 1px solid #ddd !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+  overflow: hidden !important;
+}
+
+.tooltip-enabled {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.tooltip-enabled:hover {
+  background-color: #f0f8ff;
+}
+
+/* Previous Sales Tooltip Styles */
+.prev-sales-tooltip {
+  width: 420px;
+  max-width: 90vw;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.tooltip-header {
+  background: #e3f2fd;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
+}
+
+.tooltip-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #1976d2;
+  margin: 0;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sales-data {
+  padding: 0;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 0;
+}
+
+.sales-table thead {
+  background: #f8f9fa;
+}
+
+.sales-table th {
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 12px;
+  color: #495057;
+}
+
+.sales-table td {
+  padding: 8px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 12px;
+  color: #212529;
+}
+
+.sales-table tbody tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.sales-table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+.sales-table tbody tr:hover {
+  background: #e3f2fd;
+}
+
+.price-cell-green {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.no-data {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}

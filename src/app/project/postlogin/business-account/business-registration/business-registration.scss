@@ -1,0 +1,254 @@
+.width-125 {
+    width: 125px;
+}
+
+.subscription-tab-container {
+    .plan-container {
+        border: 1px solid #0065F4;
+        border-radius: 12px;
+        padding: 0;
+        height: 161px;
+    }
+
+    .plan-details {
+        display: flex;
+        background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 50%, #E0EAFC 100%);
+        border-radius: 11px;
+        padding: 1rem;
+    }
+
+    .divider-content {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .side-border {
+        border-left: 1px solid #FFFFFF;
+        height: 30px;
+        align-self: center;
+    }
+
+    .subs-bar {
+        border: 1px solid #D5E7FA;
+        height: 30px;
+        align-self: center;
+    }
+
+    .plan-text {
+        font-size: 12px;
+        color: #6F7180;
+        font-weight: 500;
+    }
+
+    .w-30 {
+        width: 30%;
+    }
+
+    .w-60 {
+        width: 60%;
+    }
+
+    .w-70 {
+        width: 70%;
+    }
+
+    .w-80 {
+        width: 80%;
+    }
+    .w-100 {
+        width: 100%;
+    }
+
+    .prog-container {
+        // width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+    }
+
+    .cost-text {
+        font-size: 16px;
+        font-weight: bold;
+        color: #05082B;
+    }
+
+    .subscription-details {
+        display: flex;
+        padding: 1rem;
+    }
+
+    .date-text {
+        font-size: 14px;
+        color: #05082B;
+        font-weight: 600;
+    }
+
+    .grow-box {
+        border: 1px solid #D5E7FA;
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 161px;
+    }
+
+    .grow-text {
+        color: #05082B;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .grow-description {
+        font-size: 14px;
+        font-weight: 500;
+        color: #6F7180;
+    }
+
+    .upgrade-content {
+        display: flex;
+    }
+
+    .upgrade-desc {
+        display: flex;
+        width: 50%;
+    }
+
+    .split-content {
+        display: flex;
+    }
+
+    .w-90 {
+        width: 90%;
+    }
+
+    .up-text {
+        font-weight: 500;
+        font-size: 12px;
+        color: #6F7180;
+    }
+
+    .grow-img {
+        width: 59px;
+        height: 17px;
+    }
+
+    .price-cost {
+        color: #05082B;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .price-date {
+        color: #6F7180;
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+    .table-box {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: .5rem 1rem;
+        border-bottom: 1px solid #D5E7FA;
+    }
+
+    .prog-title {
+        font-weight: 500;
+        font-size: 14px;
+        color: #1E1E25;
+    }
+
+    .prog-prim-value {
+        font-weight: 600;
+        font-size: 14px;
+        color: #0065F4;
+    }
+
+    .prog-sec-value {
+        font-weight: 600;
+        font-size: 14px;
+        color: #E22C28;
+    }
+
+    .prog-info-text {
+        font-weight: 500;
+        font-size: 12px;
+        color: #6F7180;
+    }
+
+    .pog-count {
+        font-weight: 600;
+        font-size: 14px;
+        color: #05082B;
+    }
+
+    .prog-sub-count-text {
+        font-weight: 500;
+        font-size: 10px;
+        color: #6F7180;
+        margin-left: .25rem;
+    }
+
+    .table-bar {
+        border: 1px solid #D5E7FA;
+        height: 38px;
+        align-self: center;
+    }
+
+    ::ng-deep .my-custom-primary-progress-bar .mat-progress-bar-fill::after {
+        background-color: #0065F4 !important;
+      }
+
+    ::ng-deep .my-custom-sec-progress-bar .mat-progress-bar-fill::after {
+        background-color: red !important;
+      }
+      
+}
+
+.congrats-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);     /* dark translucent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;                     /* on top of most content */
+}
+
+.congrats-content {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.congrats-gif {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,162 @@
+<div class="p-2">
+  <div class="d-flex my-3 w-100 justify-content-between title-text text-center">
+    <div>
+      <b> Notes</b>
+    </div>
+    <div>
+      <i
+        matTooltip="Suggest Email"
+        class="material-icon mx-1"
+        (click)="suggestEmail()"
+        >mail</i
+      >
+      <i
+        matTooltip="Upload note"
+        class="material-icon mx-1"
+        (click)="noteImage.click()"
+        >image</i
+      >
+
+      <input
+        type="file"
+        #noteImage
+        accept="image/*"
+        (change)="uploadNote($event)"
+        style="display: none"
+      />
+    </div>
+  </div>
+  <div>
+    <div class="table-responsive process-table">
+      <table id="example" class="table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Note</th>
+            <th class="width-100">Status</th>
+            <th class="width-50">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [formGroup]="noteForm">
+            <td>
+              <textarea
+                style="min-height: 28px !important"
+                rows="1"
+                class="b-light w-100"
+                type="text"
+                formControlName="message"
+              ></textarea>
+            </td>
+            <td>
+              <select class="b-light w-100" formControlName="relationStatusId">
+                <option
+                  *ngFor="let item of apiService.allRelationStatuses"
+                  [value]="item.id"
+                >
+                  {{ item.description }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <i
+                matTooltip="Save Note"
+                class="material-icon mx-1"
+                (click)="addNote()"
+                >save</i
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <div
+      class="table-responsive process-table my-2"
+      style="max-height: 400px; overflow: auto"
+    >
+      <table id="example" class="table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Note</th>
+            <th class="width-100">Status</th>
+            <th class="width-125">Created Date</th>
+            <th class="width-50">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            [formGroup]="item"
+            *ngFor="let item of this.data.notes.controls; let i = index"
+          >
+            <tr>
+              <td>
+                <div class="d-flex justify-content-between align-items-center">
+                  <ng-container *ngIf="!item.expanded">
+                    <div
+                      style="
+                        overflow: hidden !important;
+                        height: 28px !important;
+                      "
+                      class="bg-disable"
+                    >
+                      {{ item.get("message").value | slice : 0 : 100 }}
+                    </div>
+                    ...
+                  </ng-container>
+                  <dadyin-button
+                    (click)="item.expanded = !item.expanded"
+                    class="text-primary"
+                    [label]="item.expanded ? 'Collapse' : 'Expand'"
+                    [theme]="'borderless-primary'"
+                    [type]="'icon'"
+                    [typeval]="item.expanded ? 'expand_less' : 'expand_more'"
+                  >
+                  </dadyin-button>
+                </div>
+              </td>
+              <td>
+                <div class="bg-disable">
+                  {{ getStatusName(item.get("relationStatusId").value) }}
+                </div>
+              </td>
+              <td>
+                <div class="bg-disable">
+                  {{
+                    item.get("audit").value?.lastModifiedDate
+                      | date : "dMMMyy h:mm a"
+                  }}
+                </div>
+              </td>
+              <td>
+                <i
+                  *ngIf="item.get('fileName').value"
+                  matTooltip="View uploaded Image"
+                  class="material-icon mx-1"
+                  (click)="viewImage(item.get('fileName').value)"
+                  >image</i
+                >
+              </td>
+            </tr>
+            <tr *ngIf="item.expanded">
+              <td colspan="4">
+                <div
+                  class="bg-disable note"
+                  [innerHTML]="this.formatText(item.get('message').value)"
+                ></div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center">
+      <dadyin-button
+        label="Close"
+        (click)="close()"
+        [theme]="'primary'"
+      ></dadyin-button
+      >&nbsp;
+    </div>
+  </div>
+</div>

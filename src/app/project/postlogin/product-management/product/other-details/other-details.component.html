@@ -1,0 +1,369 @@
+<ng-container>
+  <div class="d-flex my-3">
+    <div class="col-6 p-1">
+      <mat-expansion-panel expanded="true" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <div class="header" (click)="mep.expanded = !mep.expanded">
+            <div class="title-text py-2">
+              <span> Product Keywords </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+          <section class="section-card">
+            <div class="row my-2 align-items-center">
+              <div class="col-12 d-flex form-group">
+                <input type="text" #inp placeholder="Search/Type Keyboard" class="w-100 b-light mx-1" />
+                <div class="button-icon text-primary pe-2">
+
+                  <dadyin-button [widthImage]="'20px'" [heightImage]="'20px'" width="20px" height="20px" (clicked)="addKeyword(inp)" [typeval]="'assets/nicons/Add Blue.png'"
+                    [theme]="'borderless-primary'" type="image">
+                  </dadyin-button>
+                  Add
+                </div>
+              </div>
+            </div>
+
+            <div class="row product_types mt-4">
+              <div class="col-12">
+                <div class="card b-light bg-body-light">
+                  <span class="title text-light">
+                    Selected Keywords for this product
+                  </span>
+                  <div class="card-body prod-bg">
+                    <ul class="types">
+                      <ng-container *ngFor="let keyword of keywords.value; let i = index">
+                        <li class="bg-white b-light">
+                          <span class="mx-1">{{ keyword }}</span>
+                          <dadyin-button (clicked)="removeKeyword(i)" matTooltip="Delete"
+                            [typeval]="'assets/nicons/delete.png'" [widthImage]="'20px'" [heightImage]="'20px'" width="20px" height="20px" [theme]="'borderless-primary'" type="image">
+                          </dadyin-button>
+                        </li>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+    <div class="col-6 p-1">
+      <mat-expansion-panel style="overflow: unset" class="panel-no-padding" expanded="true" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <div class="header" (click)="mep.expanded = !mep.expanded">
+            <div class="title-text py-2">
+              <span> Add Similar Products </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+          <div class="container-fluid px-2">
+            <div class="row my-3">
+              <div class="col-12 d-flex form-group group-input">
+                <input type="text" #inp placeholder="Search/Type Keyboard" class="w-100 b-light mx-1" />
+                <div class="button-icon  text-primary pe-2">
+
+                  <dadyin-button [widthImage]="'20px'" [heightImage]="'20px'" width="20px" height="20px" (clicked)="addKeyword(inp)" [typeval]="'assets/nicons/Add Blue.png'"
+                    [theme]="'borderless-primary'" type="image">
+                  </dadyin-button>
+                  Add
+                </div>
+              </div>
+            </div>
+          </div>
+          <section class="section-card material-cost-calculation processed-table ">
+            <table>
+              <thead>
+                <tr style="background-color: aliceblue;">
+                  <th style="width: 30%;">Product Code</th>
+                  <th style="width: 20%;">Product Name</th>
+                  <th style="width: 35%;">Preferred Vendor</th>
+                  <th style="width: 15%;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="similarProducts?.controls?.length == 0" class="col-3 d-flex p-1">
+                  <tr>
+                    <td style="width: 30%;"></td>
+                    <td style="width: 20%;"></td>
+                    <td style="width: 35%;"></td>
+                    <td style="width: 15%;">
+                      <dadyin-button (clicked)="addSimilarProductForm()" [typeval]="'assets/nicons/add-white.png'" [widthImage]="'20px'" [heightImage]="'20px'" width="20px" height="20px"
+                        [theme]="'borderless-primary'" type="image">
+                      </dadyin-button>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container [formGroup]="similarProduct" *ngFor="
+                    let similarProduct of similarProducts.controls;
+                    let i = index
+                  ">
+                  <tr>
+                    <!--   <td style="padding-left: 20px">{{ i + 1 }}.</td>
+                    <td class="product__img" style="overflow: unset">
+                      <img
+                        (mouseenter)="onHoverImage(similarProduct)"
+                        class="product-img"
+                        src="assets/img/icons/Image.svg"
+                        alt=""
+                      />
+                      <div
+                        style="height: 74px !important; width: 73px"
+                        class="display__product__img"
+                      >
+                        <img
+                          [src]="similarProduct.get('productImage').value"
+                          alt=""
+                        />
+                      </div>
+                    </td> -->
+                    <td style="width: 30%;padding: 10px;">
+                      <dadyin-searchable-select [marginBottom]="false" placeholder="Select Product Code"
+                        [control]="similarProduct.get('productCode')" (changed)="setProductName($event, similarProduct)"
+                        [fullItems]="apiService.allproductsWithIsPackage" bindValue="productCode"
+                        bindLabel="productCode"></dadyin-searchable-select>
+                    </td>
+                    <td style="width: 20%;padding: 10px;">
+                      <dadyin-searchable-select [marginBottom]="false" placeholder="Select Product Name"
+                        [control]="similarProduct.get('productName')" (changed)="setProductCode($event, similarProduct)"
+                        [fullItems]="apiService.allproductsWithIsPackage" bindValue="description"
+                        bindLabel="description"></dadyin-searchable-select>
+                    </td>
+                    <td style="width: 35%;padding: 10px;">
+                      <!-- <select formControlName="preferredVendorId">
+                        <ng-container>
+                          <option disabled value="null">None</option>
+                          <option disabled *ngFor="let vendor of businessAccountService?.vendorsList" [value]="vendor.id">
+                            {{ vendor.name }}</option>
+                        </ng-container>
+                      </select> -->
+                      <dadyin-searchable-select [marginBottom]="false" placeholder="Search for vendor"
+                        [control]="similarProduct.get('preferredVendorId')"
+                        (change)="setProductCode($event, similarProduct)"
+                        [fullItems]="businessAccountService?.vendorList" bindValue="relationAccountId"
+                        bindLabel="relationAccountName"></dadyin-searchable-select>
+                    </td>
+                    <td style="width: 15%;padding: 10px;">
+                      <dadyin-button (clicked)="removeSimilarProduct(i)" matTooltip="Delete"
+                        [typeval]="'assets/nicons/delete.png'"  [theme]="'borderless-primary'" type="image">
+                      </dadyin-button>
+                      <dadyin-button *ngIf="similarProducts?.controls?.length == i + 1"
+                        (clicked)="addSimilarProductForm()" [typeval]="'assets/nicons/add-white.png'" 
+                        [theme]="'borderless-primary'" type="image">
+                      </dadyin-button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </section>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <!--   section two -->
+  <div class="d-flex my-3">
+    <div class="col-6 p-1">
+      <mat-expansion-panel expanded="true" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <div class="header" (click)="mep.expanded = !mep.expanded">
+            <div class="title-text py-2">
+              <span> Product applications and usecase </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+          <section class="section-card">
+
+            <div class="row product_types mt-4">
+              <div class="col-12">
+                <div class=" area-section">
+                  <div class="attribute one attr-b">
+                    <label for="">Product applications and usecase</label>
+                    <div class="attribute-input">
+                      <textarea tabindex="3" type="text" rows="4"></textarea>
+                    </div>
+                  </div>
+                  <img class="button-icon" class="info-icon" [widthImage]="'20px'" [heightImage]="'20px'" width="20px" height="20px" src="assets/nicons/ai.png" alt="info">
+                </div>
+                <!--   <div class="card b-light " style="background-color: aliceblue;" >
+                  <span class="title">
+                    Product applications and usecase
+                  </span>
+                  <div class="card-body prod-bg">
+                  <dadyin-editor
+                       >
+                      </dadyin-editor>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </section>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+    <div class="col-6 p-1">
+      <mat-expansion-panel style="overflow: unset" class="panel-no-padding" expanded="true" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <div class="header" (click)="mep.expanded = !mep.expanded">
+            <div class="title-text py-2">
+              <span> Platform Integrations </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+
+          <section class="section-card material-cost-calculation processed-table buying-capacity ">
+            <table>
+              <thead>
+                <tr style="background-color: aliceblue;">
+                  <th style="width:10%;">Sr No.</th>
+                  <th style="width: 25%;">Platform</th>
+                  <th style="width: 20%;">Platform Linking</th>
+                  <th style="width: 20%;">Listing Price/SKU</th>
+                  <th style="width: 25%;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <ng-container *ngFor="
+                    let similarProduct of [0,1,2];
+                    let i = index
+                  ">
+                  <tr>
+                    <td style="width: 10%;" class="text-center">{{i+1}}</td>
+                    <td style="width: 25%;">
+                      <div class="form-group-table">
+                        <input type="text" class="w-100 bg-light border-1 mx-1" />
+                      </div>
+                    </td>
+                    <td style="width: 20%;">
+                      <div class="button-group-connect  text-light ">
+                        <dadyin-button [widthImage]="'20px'" [heightImage]="'20px'" class="mx-1" (clicked)="addKeyword(inp)"
+                          [typeval]="'assets/nicons/Add Blue.png'" [theme]="'borderless-primary'" type="image">
+                        </dadyin-button>
+                        Connected
+                      </div>
+                    </td>
+                    <td style="width: 20%;">
+                      <div class="form-group-table">
+                        <input type="text" class="w-100 bg-light border-1 mx-1" />
+                      </div>
+                    </td>
+                    <td style="width: 25%;">
+                      <div class="button-group  text-primary ">
+                        <dadyin-button [widthImage]="'20px'" [heightImage]="'20px'" width="20px" height="20px" class="mx-1" (clicked)="addKeyword(inp)" [typeval]="'assets/nicons/Add Blue.png'"
+                          [theme]="'borderless-primary'" type="image">
+                        </dadyin-button>
+                        List on platform
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </section>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <!--  section three  -->
+  <div class="d-flex my-3">
+    <div class="col-12 p-1">
+      <mat-expansion-panel style="overflow: unset" class="panel-no-padding" expanded="true" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <div class="header" (click)="mep.expanded = !mep.expanded">
+            <div class="title-text py-2">
+              <span> Competitor pricing </span>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+
+          <section class="section-card material-cost-calculation processed-table  buying-capacity">
+            <table>
+              <thead>
+                <tr style="background-color: aliceblue;">
+                  <th style="width:3%;"></th>
+                  <th style="width: 15%;">Competitor</th>
+                  <th style="width: 15%;">Price (USD/SKU)</th>
+                  <th style="width: 15%;">MQO</th>
+                  <th style="width: 25%;">Source/Link for pricing</th>
+                  <th style="width: 8%;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <ng-container *ngFor="
+                    let similarProduct of [0,1,2];
+                    let i = index
+                  ">
+                  <tr>
+                    <td class="product__img text-center" style="width: 3%;">
+                      <img (mouseenter)="onHoverImage(similarProduct)" class="product-img"
+                        src="assets/img/icons/Image.svg" alt="" />
+                      <div style="height: 74px !important; width: 73px" class="display__product__img">
+                        <img [src]="null" alt="" />
+                      </div>
+                    </td>
+                    <td style="width: 15%;">
+                      <div class="form-group-table">
+                        <input type="text" class="w-100 bg-light border-1 " />
+                      </div>
+                    </td>
+                    <td style="width: 15%;">
+                      <div class="form-group-table">
+                        <input type="text" class="w-100 bg-light border-1 " />
+                      </div>
+                    </td>
+                    <td style="width: 15%;">
+                      <div class="form-group-table">
+                        <input type="text" class="w-100 bg-light border-1 " />
+                      </div>
+                    </td>
+                    <td style="width: 25%;">
+                      <div class="form-group-table">
+                        <input type="text" class="w-100 bg-light border-1 " />
+                        <img src="assets/nicons/ai.png" class="ai-img" alt="">
+                      </div>
+                    </td>
+                    <td style="width: 8%;">
+                      <div class="d-flex align-items-center justify-content-start gap-2" style="border:none;">
+                        <dadyin-button [typeval]="'assets/nicons/download.png'" [theme]="'borderless-primary'"
+                          type="image">
+                        </dadyin-button>
+                        <dadyin-button [typeval]="'assets/nicons/delete.png'" [theme]="'borderless-primary'"
+                          type="image">
+                        </dadyin-button>
+                        <dadyin-button [typeval]="'assets/nicons/add-white.png'" [theme]="'borderless-primary'"
+                          type="image">
+                        </dadyin-button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </section>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <div class="my-2 b-light bg-white py-2">
+    <div class="d-flex align-items-center w-100 justify-content-center">
+      <input type="checkbox" class="mx-2" />
+      <span class="title-text">I have read, understand and agree to Dadyin's Terms and conditions.
+      </span>
+    </div>
+  </div>
+</ng-container>

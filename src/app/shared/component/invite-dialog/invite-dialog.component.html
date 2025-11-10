@@ -1,0 +1,144 @@
+<div class="p-3">
+    <div class="text-center title-text">
+        Invite
+    </div>
+    <div class="mar-top-15">
+        <form class="row" [formGroup]="inviteDetailGroup">
+            <div class="col-md-4 col-lg-4 col-12">
+                <dadyin-input inputType="string" formControlName="inviteTo" label="Invite To" [isClearable]=false>
+                </dadyin-input>
+            </div>
+            <div class="col-md-4 col-lg-4 col-12">
+                <dadyin-input inputType="email" formControlName="email" label="Email ID" [isClearable]=false>
+                </dadyin-input>
+            </div>
+            <div class="col-md-4 col-lg-4 col-12 d-flex">
+                <ng-container formGroupName="phone">
+                    <div class="width-perc-50 attribute b-none">
+                        <label class="bg-white" for="yesno">Country Code</label>
+                        <ng-select appendTo="body" formControlName="countryId" [searchFn]="customSearchFn"
+                            [clearable]="false" class="custom" [items]="countries" labelForId="yesno" bindValue="id">
+                            <ng-template ng-label-tmp let-item="item">
+                                <div> <img width="10px" height="10px"
+                                        src="{{'../../../../../../assets/img/flags/' + item?.iso3?.toLowerCase() + '.svg'}}">
+                                    {{item?.iso2}} {{(item?.phoneCode)}}</div>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                                <div> <img width="10px" height="10px"
+                                        src="{{'../../../../../../assets/img/flags/' + item?.iso3?.toLowerCase() + '.svg'}}">
+                                    {{item?.iso2}} {{(item?.phoneCode)}}</div>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div class="width-perc-50 px-1">
+                        <div class="attribute one attr-b">
+                            <label for="">Phone
+
+                            </label>
+                            <div class="attribute-input">
+                                <input onKeyPress="if(this.value.length==10) return false;" type="number" formControlName="number" />
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </form>
+    </div>
+    <ng-container *ngIf="data.redirectType == ''">
+        <div>         
+            <form [formGroup]="inviteDetailGroup">
+
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-12">
+                        <dadyin-select class="input-field" formControlName="inviteType" label="Invite Type"
+                            [emptyOption]="'Select Invite Type'" [optionArr]="businessCategories" optionLabel="label"
+                            optionValue="value" (selectedStateChange)="selectedInviteType = $event;"
+                            [value]="selectedInviteType">
+                        </dadyin-select>
+                    </div>
+                    <div class="col-md-8 col-lg-8 col-12">
+                        <ng-container *ngIf="selectedInviteType !== 'BUSINESSOWNER'">
+                            <div class="d-flex align-items-center">
+                                <div class="title-text text-light font-size-12">Inviting Customer to share catelog</div>
+                                <input (change)="onShareCatelogChange('Y')" formControlName="shareCatelog" type="radio"
+                                    [value]="'Y'" id="yes" class="mx-2" />
+                                <label for="yes"> Yes </label>
+                                <input (change)="onShareCatelogChange('N')" formControlName="shareCatelog" type="radio"
+                                    [value]="'N'" id="no" class="mx-2" />
+                                <label for="no"> No </label>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="selectedInviteType == 'BUSINESSOWNER'" style="margin-top:-15px">
+                            <dadyin-select class="input-field" formControlName="businessType" label="Business Type"
+                                [emptyOption]="'Select Business Type'" [optionArr]="businessType" optionLabel="label"
+                                optionValue="value" (selectedStateChange)="selectedBusinessType = $event;"
+                                [value]="selectedBusinessType">
+                            </dadyin-select>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-12"
+                        *ngIf="inviteDetail.shareCatelog.value==='Y' && inviteDetail.inviteType.value!=='owner'">
+                        <dadyin-select class="input-field" formControlName="catelog" label="Catelog"
+                            [emptyOption]="'Select Catelog'" [optionArr]="catalogs" optionLabel="label"
+                            optionValue="value" (selectedStateChange)="selectedCatalog = $event;"
+                            [value]="selectedCatalog">
+                        </dadyin-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- <form class="row g-0"> -->
+                    <div class="col-12">
+                        <dadyin-input inputType="textarea" formControlName="message" label="Personalize Message"
+                            [isClearable]=false>
+                        </dadyin-input>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </form>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="data.redirectType == 'QUICK_CHECKOUT'">
+        <form [formGroup]="inviteDetailGroup">
+            <div>              
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-12">
+                        <dadyin-select class="input-field" formControlName="inviteType" label="Invite Type"
+                            [emptyOption]="'Select Invite Type'" [optionArr]="businessCategories" optionLabel="label"
+                            optionValue="value" (selectedStateChange)="selectedInviteType = $event;"
+                            [value]="selectedInviteType">
+                        </dadyin-select>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-12">
+                        <dadyin-select class="input-field" formControlName="businessType" label="Business Type"
+                            [emptyOption]="'Select Business Type'" [optionArr]="businessType" optionLabel="label"
+                            optionValue="value" (selectedStateChange)="selectedBusinessType = $event;"
+                            [value]="selectedBusinessType">
+                        </dadyin-select>
+                    </div>
+                    <div class="col-8 h-3">
+                        <dadyin-input inputType="textarea" formControlName="address" label="Address" [isClearable]=false>
+                        </dadyin-input>
+                    </div>
+                    <div class="col-12">
+                        <p>Order will be delivery at Single place even thought you have ordered along with the buddy.
+                            You
+                            can choose preferred delivery location during payment.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="delivery-details">
+                <div style="padding: 10px;">
+                    <dadyin-input inputType="text" formControlName="message" label="Add Personalize Message"
+                        [isClearable]=false>
+                    </dadyin-input>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+    <div class="mar-top-10 text-center">
+        <dadyin-button label="Cancel" [theme]="'default'" (click)="onCancelCLicked()"></dadyin-button>&nbsp;
+        <dadyin-button label="Invite" [theme]="'primary'" (click)="onSubmit()"></dadyin-button>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+.payment-section {
+    padding: 10px;
+    height: 100vh;
+
+    .back-btn {
+        color: #9DA2B4;
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    .border {
+        border-width: 1px !important;
+        border: 1px solid #D5E7FA !important;
+        margin: 1.25rem 0;
+    }
+
+    .subscribe-text {
+        color: #9DA2B4;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .price {
+        font-size: 20px;
+        font-weight: bold;
+        color: #05082B;
+    }
+
+    .price-sub-text {
+        font-size: 12px;
+        color: #9DA2B4;
+        font-weight: 500;
+    }
+
+    .plan-text {
+        font-weight: 600;
+        font-size: 14px;
+        color: #9DA2B4;
+    }
+
+    .plan-subscribe-text {
+        font-weight: 600;
+        font-size: 16px;
+        color: #05082B;
+    }
+
+    .billing-text {
+        font-weight: 600;
+        font-size: 14px;
+        color: #9DA2B4;
+    }
+
+    .paid-users {
+        margin-top: 2rem;
+    }
+
+    .paid-user-text {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .cost-text {
+        color: #05082B;
+        font-size: 24px;
+        font-weight: 800;
+    } 
+
+    .item-total {
+        font-weight: 600;
+        font-size: 16px;
+        color: #05082B;
+    }
+
+    .due-text {
+        font-weight: 800;
+        font-size: 20px;
+        color: #05082B;
+    }
+
+    .price-cost {
+        font-weight: 700;
+        color: #05082B;
+        font-size: 16px;
+    }
+
+    .discount-text {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0167F4;
+    }
+
+    .discount-amount {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0167F4;
+    }
+
+
+    .billed-text {
+        color: #9DA2B4;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .paid-amount {
+        color: #05082B;
+        font-weight: 800;
+        font-size: 16px;
+    }
+
+    .payment-container {
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .coupen-container {
+        width: 275px;
+    }
+
+    .code-input {
+        height: 40px !important;
+    }
+
+    .apply-btn {
+        width: 90px;
+        justify-content: center;
+        color: #0167F4;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .promo-text {
+        font-size: 12px;
+        font-weight: 500;
+        color: #0167F4;
+    }
+
+    .subscribe-btn {
+        color: #FFFFFF;
+        font-weight: 600;
+        font-size: 18px;
+        width: 293px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: #0065F4;
+    }
+}

@@ -1,0 +1,21 @@
+.content-title {
+  background-color: #F1F5F9;
+  padding: 3px;
+  margin-left:3px;
+  margin-right:3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-footer-row{
+  background: var(--card-header-bg) !important;
+}
+
+
+.table-icon {
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
+  padding: 2px;
+}

@@ -1,0 +1,69 @@
+<div class="header-light">
+  <div class="d-flex" *ngIf="isShowProcessList == false">
+    <div class="">
+      <strong>Template Cost : </strong>
+      <span class="price-text"> {{ getTemplateCost() }} </span>
+    </div>
+    <div class=" mx-2 border-l-light">
+      <strong>Template Density : </strong>
+      <span class="price-text"> {{ getTemplateDensity() }} </span>
+    </div>
+  </div>
+  <div class="action-btns">
+    <div class="mx-1">
+      <dadyin-button  [isDisabled]="
+          !this.apiService.finalSave ||
+          templateProcesses?.controls[this.templateProcesses?.length - 1]
+            ?.get('process')
+            ?.get('isLayerPercentageCalculated')?.value == false
+        " label="Add New Process" (clicked)="createNewProcess(false)"
+        type="image"    [theme]="'borderless-primary'" [class]="'bg-white px-2'"
+         [typeval]="'assets/nicons/add-white.png'" 
+        >
+      </dadyin-button>
+    </div>
+    <div>
+      <dadyin-button  [isDisabled]="
+          !this.apiService.finalSave ||
+          templateProcesses?.controls[this.templateProcesses?.length - 1]
+            ?.get('process')
+            ?.get('isLayerPercentageCalculated')?.value == false
+        " label="Add Existing Process" (clicked)="createNewProcess(true)"
+         type="image"    [theme]="'borderless-primary'" [class]="'bg-white px-2'"
+         [typeval]="'assets/nicons/add-white.png'" >
+      </dadyin-button>
+    </div>
+    <div class="opt mx-1 view-graph">
+      <dadyin-button  (clicked)="this.isShowProcessList = !this.isShowProcessList"
+      [class]="'bg-white px-2'"
+        [theme]="'borderless-primary'" type="image" [typeval]="'assets/img/icons/Pie Chart.svg'" width="40px">
+      </dadyin-button>
+    </div>
+    <div class="opt expand-all">
+      <button type="button" class="btn b-none" [ngClass]="isExpandAll ? 'active' : ''"
+        (click)="isExpandAll = !isExpandAll">
+        <img src="assets/img/icons/{{
+            isExpandAll ? 'Active Collapse Arrow.svg' : 'Expand Arrow.svg'
+          }}" alt="" />
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- List of Process -->
+<div class="app-content">
+  <ng-container *ngIf="this.isShowProcessList">
+    <app-process-list [processData]="templateProcesses"></app-process-list>
+  </ng-container>
+
+  <ng-container *ngIf="!this.isShowProcessList">
+    <ng-container *ngFor="let process of templateProcesses?.controls; let i = index">
+      <div>
+        <app-edit-process [componentUoms]="componentUoms" (calculate)="calculateValues($event)"
+          [existingProcess]="existingProcess" (deleteProcessEvent)="removeProcess(i)" [templateForm]="templateForm"
+          [index]="i" [isExpandAll]="isExpandAll" [process]="process">
+        </app-edit-process>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

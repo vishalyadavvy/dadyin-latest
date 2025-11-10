@@ -1,0 +1,57 @@
+.close-dialog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.dialog-container {
+  position: relative;
+  min-height: 400px;
+
+  .card-body {
+    text-align: center;
+    margin-top: 10%;
+
+    h2.title {
+      color: #03256c;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+    p {
+      font-weight: 400;
+      color: #03256c;
+      margin: 10% auto;
+      max-width: 350px;
+      font-size: 1rem;
+    }
+    input {
+      background: #f1f5f9;
+      border: 1px solid #d5e7fa;
+      border-radius: 2px;
+      padding: 20px;
+      width: 100%;
+      margin-bottom: 10%;
+      font-size: 1rem;
+    }
+
+    .dialog-buttons {
+      button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+      button.secondry {
+        background: #f1f5f9;
+        border: 1px solid #03256c;
+        border-radius: 2px;
+        margin-right: 10px;
+      }
+      button.primary {
+        border-color: #03256c;
+        background: #03256c;
+        color: #fff;
+        border-radius: 2px;
+      }
+    }
+  }
+}
