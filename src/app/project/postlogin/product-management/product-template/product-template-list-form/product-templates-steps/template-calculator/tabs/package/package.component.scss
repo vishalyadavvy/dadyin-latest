@@ -89,3 +89,10 @@
   label {
     cursor: pointer;
   }
+  .one{
+  display: flex;
+  select{
+    margin-right: 10px;
+    background-color: var(--body-bg);
+  }
+}
