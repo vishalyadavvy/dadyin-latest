@@ -1,5 +1,5 @@
 <!-- Title -->
-<!-- <div class="header-light my-2">
+<!--  <div class="header-light my-2">
   <div class="attribute w-100" [ngStyle]="{ opacity: currentControl ? 1 : 0 }">
     <label *ngIf="currentControl" for="">{{
       this.getAttributeObjectById(currentControl.parent.value.attributeId)
@@ -42,35 +42,56 @@
     [typeval]="'information'"
   >
   </dadyin-button>
-</div> -->
+</div>  -->
 
 <div
   class="toolbar padding-bar height-40 my-2 b-round bg-card-header d-flex align-items-center"
 >
   <div class="b-round my-2 d-flex w-75 bg-card-header">
-      <div class="title-text ">
-        <strong class="mr-2"> Package Attribute Calculator </strong>
-        <dadyin-button
-          tooltip="Test Product Calculator"
-          [theme]="'borderless-primary'"
-          [typeval]="'calculate'"
-          [type]="'icon'"
-        >
-        </dadyin-button>
+      <div class="title-text my-auto">
+        <strong class="mr-2"  style="white-space: pre;"> Package Attribute Calculator </strong>
+     
       </div>
-         <div class="attribute-input w-50 ms-3">
-      <input type="text" class="form-control">
-    </div>
+       <div class="position-relative w-50">
+          <div class="attribute w-100" [ngStyle]="{ opacity: currentControl ? 1 : 0 }">
+    <label *ngIf="currentControl" for="">{{
+      this.getAttributeObjectById(currentControl.parent.value.attributeId)
+        ?.description
+    }}</label>
+    <input
+      [ngClass]="{ highlight: currentControl }"
+      class="width-perc-100"
+      [(ngModel)]="formulaValue"
+      [ngModelOptions]="{ standalone: true }"
+      (input)="openFormulaAutoComplete($event)"
+      type="text"
+      placeholder="Formula"
+    />
+  </div>
+  <div class="formula-autocomplete b-light" *ngIf="formulaAutoComplete">
+    <p
+      style="cursor: pointer"
+      (click)="
+        selectFormulaAttribute(
+          this.getAttributeObjectById(attribute?.attributeId)?.description
+        )
+      "
+      *ngFor="let attribute of getFilteredAutoCompleteAttributes()"
+    >
+      {{ this.getAttributeObjectById(attribute?.attributeId)?.description }}
+    </p>
+  </div>
+  </div>
     </div>
   <div>
     <dadyin-button
       label="Add New Package"
       [theme]="'borderless-primary'"
       (clicked)="addPackage()"
-      [class]="'bg-white px-2'"
+      [class]="'bg-white px-2 w-auto-img'"
       height="30px"
       type="image"
-      [typeval]="'assets/nicons/add-white.png'"
+      [typeval]="'assets/nicons/add.png'"
     >
     </dadyin-button>
   </div>
@@ -83,12 +104,13 @@
      [class]="'bg-white mx-2'"
   >
   </dadyin-button>
+  &nbsp;
   <dadyin-button
     (clicked)="openDialog()"
     [theme]="'borderless-primary'"
-     [class]="'bg-white'"
-    type="icon"
-    [typeval]="'information'"
+     [class]="'bg-white px-2 w-auto-img'"
+    type="image"
+    [typeval]="'assets/nicons/info.png'"
   >
   </dadyin-button>
   </div>
@@ -205,15 +227,16 @@
               {{ getTemplateDensity() }}
             </span>
           </div>
-       <!--    <dadyin-button
+        <dadyin-button
             class="text-right mx-2"
             (clicked)="testCalculatorModal(i1)"
             tooltip="Test Package Calculator"
-            [theme]="'primary'"
-            [typeval]="'calculate'"
-            [type]="'icon'"
+            [theme]="'borderless-primary'"
+             [typeval]="'assets/nicons/calculator.png'"
+            [type]="'image'"
+             [class]="'w-auto-img'"
           >
-          </dadyin-button> -->
+          </dadyin-button> 
         </div>
 
         <div class="options">
@@ -278,8 +301,8 @@
           <dadyin-button
             (clicked)="removePackage(i1)"
             [theme]="'borderless-danger'"
-            type="icon"
-            [typeval]="'delete_outline'"
+            type="image"
+            [typeval]="'assets/nicons/delete.png'"
           >
           </dadyin-button>
           <dadyin-button

@@ -17,8 +17,8 @@
             ?.get('process')
             ?.get('isLayerPercentageCalculated')?.value == false
         " label="Add New Process" (clicked)="createNewProcess(false)"
-        type="image"    [theme]="'borderless-primary'" [class]="'bg-white px-2'"
-         [typeval]="'assets/nicons/add-white.png'" 
+        type="image"    [theme]="'borderless-primary'" [class]="'bg-white px-2 w-auto-img'"
+         [typeval]="'assets/nicons/add.png'" 
         >
       </dadyin-button>
     </div>
@@ -29,14 +29,14 @@
             ?.get('process')
             ?.get('isLayerPercentageCalculated')?.value == false
         " label="Add Existing Process" (clicked)="createNewProcess(true)"
-         type="image"    [theme]="'borderless-primary'" [class]="'bg-white px-2'"
-         [typeval]="'assets/nicons/add-white.png'" >
+         type="image"    [theme]="'borderless-primary'" [class]="'bg-white px-2 w-auto-img'"
+         [typeval]="'assets/nicons/add.png'" >
       </dadyin-button>
     </div>
     <div class="opt mx-1 view-graph">
       <dadyin-button  (clicked)="this.isShowProcessList = !this.isShowProcessList"
-      [class]="'bg-white px-2'"
-        [theme]="'borderless-primary'" type="image" [typeval]="'assets/img/icons/Pie Chart.svg'" width="40px">
+      [class]="'bg-white px-2 w-auto-img'"
+        [theme]="'borderless-primary'" type="image" [typeval]="'assets/nicons/pie-chart.png'" >
       </dadyin-button>
     </div>
     <div class="opt expand-all">

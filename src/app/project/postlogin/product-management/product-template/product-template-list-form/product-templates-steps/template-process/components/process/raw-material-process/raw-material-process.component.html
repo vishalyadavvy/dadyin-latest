@@ -8,8 +8,8 @@
 
             <ng-container *ngIf="getprocessProducts.controls?.length==0">
             <dadyin-button (clicked)="addNewProcessProductControl()" [theme]="'borderless-primary'" type='image'
-            [class]="'hw20'"
-                     [typeval]="'assets/nicons/add-white.png'" [isDisabled]="process?.disabled ">
+            [class]="'w-auto-img'"
+                     [typeval]="'assets/nicons/add.png'" [isDisabled]="process?.disabled ">
                     </dadyin-button>
             </ng-container>
           </div>
@@ -39,17 +39,20 @@
         <div class="optional-values">
           <div class="units">
             <div class="w-100 mx-2 text-black">Total Waste %: </div>
-            <input (click)="$event.stopImmediatePropagation()" style="min-width: 40px;max-width: 100px;" type="number"
+            <div class="d-flex align-items-center position-relative">
+            <input (click)="$event.stopImmediatePropagation()" style="min-width: 100px;max-width: 100px;" type="number"
               class="w-100 h-20" formControlName="processWastePercent" (change)="calculateValues()">
             <div class="">
               <select (click)="$event.stopImmediatePropagation()" (change)="onSelectOption($event)"
-              style="background-color: var(--body-bg);"
-                class=" text-white h-20">
+              style="background-color: var(--body-bg);border-radius: 8px; position: absolute;right:0px;top: 0px;"
+                class=" text-black h-20">
+                <option value="">Option 1</option>
                 <ng-container *ngFor="let option of processCalculatorOptions.controls;let k=index">
                   <option [selected]="option.get('isSelected').value" [value]="option.get('name').value">
                     {{option.get('name').value}}</option>
                 </ng-container>
               </select>
+            </div>
             </div>
           <!--   <div class="mx-2 text-black">Cost: </div> -->
             <div class="currency-value ms-2">
@@ -210,7 +213,8 @@
         <div class="title">
           <span class="text-black me-3" >Conversion Costs</span>
           <dadyin-button (clicked)="addNewProcessConversionTypeControl();$event.stopImmediatePropagation()"
-            [theme]="'borderless-primary'" type='image'   [typeval]="'assets/nicons/add-white.png'"
+          [class]="'w-auto-img'"
+            [theme]="'borderless-primary'" type='image'   [typeval]="'assets/nicons/add.png'"
             [isDisabled]="process?.disabled  || getProcessConversionTypes?.invalid">
           </dadyin-button>
         </div>

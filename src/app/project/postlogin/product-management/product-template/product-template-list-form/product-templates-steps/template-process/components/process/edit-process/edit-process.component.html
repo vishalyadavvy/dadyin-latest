@@ -216,21 +216,24 @@
                  
                   <div
                     style="max-width: fit-content"
-                    class="d-flex align-items-center b-light b-round-left"
+                    class="d-flex align-items-center"
                   >
-                    <div class="b-light">
+                  <div class="d-flex form-input-g">
+                    <div class="b-light" style="border-top-left-radius: 8px;border-bottom-left-radius: 8px;">
                       <input
                         type="number"
-                        class="width-100 h-20"
+                        class="width-100"
                         (change)="calculateValues()"
                         formControlName="processWastePercent"
                       />
                     </div>
-                    <div class="b-light b-round">
+                    <div class="b-light b-round" style="border-radius: 8px;position: absolute;
+    right: 0px;
+    z-index: 9;">
                       <select
                         (change)="onSelectOption($event)"
                         style="background-color: var(--body-bg);"
-                        class="h-20"
+                        class=""
                       >
                         <ng-container
                           *ngFor="
@@ -248,11 +251,12 @@
                         </ng-container>
                       </select>
                     </div>
+                    </div>
                     <div
                       class="d-flex align-items-center justify-content-center cursor"
                     >
                       <button
-                        class="b-none d-flex align-items-center justify-content-center bg-transparent p-0"
+                        class="b-none d-flex align-items-center ms-2 justify-content-center bg-transparent p-0"
                         (click)="openProcessWasteModal()"
                         [disabled]="processForm?.disabled"
                       >
@@ -267,7 +271,7 @@
                 <div class="units justify-content-end">
                  <!--  <div class="mx-2">Density:</div> -->
                   <div class="currency-value">
-                    <span>{{
+                    <span class="text-black">{{
                       getProductOfProcessUserConversionUom("density").value
                     }}</span>
                     <span>{{
@@ -275,10 +279,10 @@
                     }}</span>
                   </div>
                   <div class="unit-value">
-                    <select
+                    <select class="text-black unit"
                       (change)="calculateValues()"
                       [formControl]="grossDensityUom"
-                      class="unit"
+                     
                     >
                       <option value="" disabled selected>Select Uom</option>
                       <ng-container
@@ -297,7 +301,7 @@
                 <div class="units justify-content-end">
                 <!--   <div class="mx-3">Cost:</div> -->
                   <div class="currency-value">
-                    <span>{{
+                    <span class="text-black">{{
                       processForm
                         .get("materialMetricCost")
                         .get("userConversionUom").value
@@ -309,7 +313,7 @@
                     }}</span>
                   </div>
                   <div class="unit-value">
-                    <select
+                    <select class="text-black"
                       (change)="calculateValues()"
                       [formControl]="totalCostUom"
                     >

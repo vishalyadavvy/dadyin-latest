@@ -74,19 +74,90 @@
 
      <div class="b-round my-2 d-flex w-75 bg-card-header">
       <div class="title-text ">
-        <strong class="mr-2"> Product Attribute Calculator </strong>
+        <strong class="mr-2" style="white-space: pre;"> Product Attribute Calculator </strong>
         <dadyin-button
           (click)="testCalculatorModal()"
           tooltip="Test Product Calculator"
           [theme]="'borderless-primary'"
-          [typeval]="'calculate'"
-          [type]="'icon'"
+          [typeval]="'assets/nicons/calculator.png'"
+          [type]="'image'"
+          [class]="'w-auto-img'"
         >
         </dadyin-button>
       </div>
-         <div class="attribute-input w-50 ms-3">
-      <input type="text" class="form-control">
+      <div class="position-relative w-50">
+        <div
+      class="attribute w-100"
+      [ngStyle]="{ opacity: currentControl ? 1 : 0 }"
+    >
+      <label *ngIf="currentControl" for="">{{
+        this.getAttributeObjectById(currentControl.parent.value.attributeId)
+          ?.description
+      }}</label>
+      <input
+        [ngClass]="{ highlight: currentControl }"
+        class="width-perc-100"
+        [(ngModel)]="formulaValue"
+        [ngModelOptions]="{ standalone: true }"
+        (input)="openFormulaAutoComplete($event)"
+        type="text"
+        placeholder="Formula"
+      />
     </div>
+
+    <div class="formula-autocomplete b-light" *ngIf="formulaAutoComplete">
+      <p
+        style="cursor: pointer"
+        (click)="
+          selectFormulaAttribute(
+            this.getAttributeObjectById(attribute?.attributeId)?.description
+          )
+        "
+        *ngFor="
+          let attribute of getFilteredAutoCompleteAttributes();
+          let i = index
+        "
+      >
+        {{ this.getAttributeObjectById(attribute?.attributeId)?.description }}
+      </p>
+      <ng-container
+        *ngFor="let att of lastProcessProcessProducts?.controls; let k = index"
+      >
+        <ng-container
+          *ngFor="
+            let processProductAttribute of getProcessProductAttributeValues(k)
+              .controls | sortFormArray;
+            let l = index
+          "
+        >
+          <p
+            style="cursor: pointer"
+            (click)="
+              selectFormulaAttribute(
+                '[Process].[Layer]' +
+                  k +
+                  '].' +
+                  this.getAttributeObjectById(
+                    processProductAttribute.value.attributeId
+                  )?.description
+              )
+            "
+            *ngIf="
+              !layerWiselabelTypeAttributeIds[
+                att?.value.subProductId + '' + l
+              ]?.includes(processProductAttribute.value.attributeId)
+            "
+          >
+            Layer[{{ k }}].{{
+              this.getAttributeObjectById(
+                processProductAttribute.value.attributeId
+              )?.description
+            }}
+          </p>
+        </ng-container>
+      </ng-container>
+    </div> 
+</div>
     </div>
 
  
@@ -99,12 +170,13 @@
        [class]="'bg-white'"
     >
     </dadyin-button>
+    &nbsp;
     <dadyin-button
       (click)="openDialog()"
       [theme]="'borderless-primary'"
-      type="icon"
-      [typeval]="'information'"
-      [class]="'bg-white'"
+       [class]="'bg-white px-2 w-auto-img'"
+    type="image"
+    [typeval]="'assets/nicons/info.png'"
     >
     </dadyin-button>
     </div>
