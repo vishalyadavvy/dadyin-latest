@@ -1,27 +1,30 @@
-.close-dialog {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
+
 
 .dialog-container {
   position: relative;
   min-width: 800px;
-  padding: 20px;
+  padding: 10px;
 
   .dialog-card-header {
-    margin-top: 2%;
+    margin-top: 0px;
     width: 100%;
     height: fit-content;
-    background: #a2c6e9;
-    border-radius: 2px;
-    text-align: center;
+    background: var(--card-header-bg);
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    position: relative;
+    padding: 5px 10px;
     h3 {
-      color: var(--primary-color);
       font-weight: 500;
       margin: 0;
     }
+    .close-dialog {
+  position: absolute;
+top: 50%;
+    transform: translateY(-50%);
+  right: 10px;
+  cursor: pointer;
+}
   }
 
   .card-body {

@@ -1,14 +1,14 @@
 .close-dialog {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
 }
 
 .dialog-container {
     position: relative;
     min-width: 400px;
-    padding: 20px;
+    padding: 10px;
 
     .dialog-card-header {
         margin-top: 2%;

@@ -1,5 +1,5 @@
 <div class="dialog-container">
-  <i class="material-icon" mat-dialog-close>close</i>
+  <i class="material-icon close-dialog" mat-dialog-close>close</i>
 
   <ng-container *ngIf="productAttributeValues.controls?.length > 0">
     <section class="card">
@@ -98,7 +98,7 @@
                               )?.availableUOMs?.length > 0
                             "
                           >
-                            <select
+                            <select class="bg-light"
                               tabindex="-1"
                               *ngIf="
                                 !['Number', 'String'].includes(
@@ -425,7 +425,7 @@
                                       )?.availableUOMs?.length > 0
                                     "
                                   >
-                                    <select
+                                    <select class="bg-light"
                                       tabindex="-1"
                                       *ngIf="
                                         !['Number', 'String'].includes(
@@ -727,7 +727,7 @@
                       )?.availableUOMs?.length > 0
                     "
                   >
-                    <select
+                    <select class="bg-light"
                       tabindex="-1"
                       *ngIf="
                         !['Number', 'String'].includes(
@@ -1007,7 +1007,7 @@
                               )?.availableUOMs?.length > 0
                             "
                           >
-                            <select
+                            <select class="bg-light"
                               tabindex="-1"
                               *ngIf="
                                 !['Number', 'String'].includes(
@@ -1178,7 +1178,7 @@
                           }}</label
                         >
                         <div class="attribute-input">
-                          <select class="width-perc-100 bg-white">
+                          <select  class="width-perc-100 bg-white">
                             <option
                               *ngFor="
                                 let opt of getArray(

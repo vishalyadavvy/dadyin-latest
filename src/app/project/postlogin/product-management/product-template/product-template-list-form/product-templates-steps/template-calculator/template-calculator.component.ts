@@ -18,6 +18,7 @@ export class TemplateCalculatorComponent implements OnInit {
 
   currentStepIndex=0
 
+  calculatorType = new FormControl('product');
   constructor(
     public dialog: MatDialog,
     public apiService: ApiService,

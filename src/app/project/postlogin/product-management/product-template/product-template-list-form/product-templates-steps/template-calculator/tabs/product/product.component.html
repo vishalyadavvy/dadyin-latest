@@ -1,6 +1,6 @@
 <form>
-  <div class="header-light my-2">
-    <div
+  <div class="header-light my-2" style="padding: 5px 8px 5px 12px;background-color: var(--card-header-bg) !important">
+    <!-- <div
       class="attribute w-100"
       [ngStyle]="{ opacity: currentControl ? 1 : 0 }"
     >
@@ -70,12 +70,33 @@
           </p>
         </ng-container>
       </ng-container>
+    </div> -->
+
+     <div class="b-round my-2 d-flex w-75 bg-card-header">
+      <div class="title-text ">
+        <strong class="mr-2"> Product Attribute Calculator </strong>
+        <dadyin-button
+          (click)="testCalculatorModal()"
+          tooltip="Test Product Calculator"
+          [theme]="'borderless-primary'"
+          [typeval]="'calculate'"
+          [type]="'icon'"
+        >
+        </dadyin-button>
+      </div>
+         <div class="attribute-input w-50 ms-3">
+      <input type="text" class="form-control">
     </div>
+    </div>
+
+ 
+<div class="d-flex align-items-center" >
     <dadyin-button
       (click)="resetFormula()"
       [theme]="'borderless-primary'"
       type="icon"
       [typeval]="'replay'"
+       [class]="'bg-white'"
     >
     </dadyin-button>
     <dadyin-button
@@ -83,12 +104,14 @@
       [theme]="'borderless-primary'"
       type="icon"
       [typeval]="'information'"
+      [class]="'bg-white'"
     >
     </dadyin-button>
+    </div>
   </div>
 
   <ng-container>
-    <div class="panel-header b-round my-2 bg-card-header">
+  <!--   <div class="panel-header b-round my-2 bg-card-header">
       <div class="title-text w-100">
         <strong class="mr-2"> Product Attribute Calculator </strong>
         <dadyin-button
@@ -100,7 +123,7 @@
         >
         </dadyin-button>
       </div>
-    </div>
+    </div> -->
 
     <div
       [formGroup]="productTemplateCalculator"
@@ -161,7 +184,7 @@
           </dadyin-button>
         </div>
         <div class="d-flex mx-1">
-          <div class="primary-text">
+          <div class="">
             <strong>Template Cost : </strong>
             <span
               (mousedown)="preventFocusChange($event)"
@@ -171,7 +194,7 @@
               {{ getTemplateCost() }}
             </span>
           </div>
-          <div class="primary-text mx-2">
+          <div class=" mx-2">
             <strong>Template Density : </strong>
             <span
               (mousedown)="preventFocusChange($event)"
@@ -203,7 +226,7 @@
               {{ attribute.description }}
             </mat-option>
           </mat-autocomplete>
-          <select class="width-perc-100 b-round" [formControl]="attributeType">
+          <select class="width-perc-100 b-round bg-light" [formControl]="attributeType">
             <option value="null" selected>Attribute Type</option>
             <option
               [value]="attributeType.id"
@@ -227,9 +250,9 @@
         </div>
         <dadyin-button
           class="px-1"
-          typeval="add"
-          type="icon"
-          [theme]="'primary'"
+          [typeval]="'assets/nicons/add-white.png'"
+          type="image"
+         [theme]="'borderless-primary'"
           [isDisabled]="!attributeType.value || !attributeName.value"
           (clicked)="addAttribute('calculator')"
         >
@@ -253,8 +276,6 @@
         </dadyin-button>
       </div>
     </div>
-
-    <!-- Card -->
     <section
       class="card"
       style="
@@ -376,7 +397,7 @@
                                 )?.availableUOMs?.length > 0
                               "
                             >
-                              <select
+                              <select class="bg-light"
                                 tabindex="-1"
                                 *ngIf="
                                   !['Number', 'String'].includes(
@@ -421,12 +442,12 @@
                                 {{ item?.get("userConversionUom").value ?? "" }}
                               </div>
                             </ng-container>
-                            <i
-                              class="cancel_outline_new material-icon"
-                              (click)="removeProductCalculatorAttribute(i)"
-                            >
-                              cancel_outline
-                            </i>
+                         
+                              <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProductCalculatorAttribute(i)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                           </div>
                         </div>
                       </div>
@@ -452,8 +473,8 @@
                         }"
                         class="my-1"
                       >
-                        <div class="attribute tabular-sheet attr-b">
-                          <div class="attribute-input">
+                        <div class="attribute tabular-sheet d-flex attr-b">
+                          <div class="attribute-input me-2">
                             <mat-icon
                               (click)="onDragClickAttribute(i)"
                               class="more_vert"
@@ -509,15 +530,15 @@
                                   )[1].choice
                                 }}
                               </button>
-                              <!-- <button >Sheet</button> -->
+                       
                             </div>
                           </div>
-                          <i
-                            (click)="removeProductCalculatorAttribute(i)"
-                            class="cancel_outline_new material-icon"
-                          >
-                            cancel_outline
-                          </i>
+                         
+                            <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProductCalculatorAttribute(i)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                         </div>
                       </div>
                     </ng-container>
@@ -598,12 +619,12 @@
                               </option>
                             </select>
                           </div>
-                          <i
-                            class="cancel_outline_new material-icon"
-                            (click)="removeProductCalculatorAttribute(i)"
-                          >
-                            cancel_outline
-                          </i>
+                   
+                            <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProductCalculatorAttribute(i)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                         </div>
                       </div>
                     </ng-container>
@@ -725,7 +746,7 @@
                                         )?.availableUOMs?.length > 0
                                       "
                                     >
-                                      <select
+                                      <select class="bg-light"
                                         tabindex="-1"
                                         *ngIf="
                                           !['Number', 'String'].includes(
@@ -774,12 +795,11 @@
                                       </div>
                                     </ng-container>
                                   </div>
-                                  <i
-                                    class="cancel_outline_new material-icon"
-                                    (click)="onDragRemoveAttribute(i, attr)"
-                                  >
-                                    cancel_outline
-                                  </i>
+                                    <dadyin-button matTooltip="Delete" 
+                              (clicked)="onDragRemoveAttribute(i, attr)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                                 </div>
                               </div>
                             </ng-container>
@@ -808,8 +828,8 @@
                                 }"
                                 class="mt-3"
                               >
-                                <div class="attribute tabular-sheet attr-b">
-                                  <div class="attribute-input">
+                                <div class="attribute tabular-sheet d-flex attr-b">
+                                  <div class="attribute-input ms-2">
                                     <mat-icon
                                       *ngIf="!attr?.get('isHidden').value"
                                       (click)="toggleVisibility(attr, true)"
@@ -866,14 +886,14 @@
                                           )[1].choice
                                         }}
                                       </button>
-                                      <!-- <button >Sheet</button> -->
+                                   
                                     </div>
                                   </div>
-                                  <i
-                                    (click)="onDragRemoveAttribute(i, attr)"
-                                    class="cancel_outline_new material-icon"
-                                    >cancel_outline</i
-                                  >
+                                     <dadyin-button matTooltip="Delete" 
+                              (clicked)="onDragRemoveAttribute(i, attr)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                                 </div>
                               </div>
                             </ng-container>
@@ -949,23 +969,22 @@
                                       </option>
                                     </select>
                                   </div>
-                                  <i
-                                    class="cancel_outline_new material-icon"
-                                    (click)="onDragRemoveAttribute(i, attr)"
-                                  >
-                                    cancel_outline
-                                  </i>
+                                      <dadyin-button matTooltip="Delete" 
+                              (clicked)="onDragRemoveAttribute(i, attr)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                                 </div>
                               </div>
                             </ng-container>
                           </ng-container>
                         </ng-container>
-                        <i
-                          class="cancel_outline_new material-icon"
-                          (click)="removeProductCalculatorAttribute(i)"
-                        >
-                          cancel_outline
-                        </i>
+                  
+                            <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProductCalculatorAttribute(i)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                       </div>
                     </ng-container>
                   </ng-container>
@@ -1067,13 +1086,13 @@
                   </ng-container>
                 </table>
               </ng-container>
-              <!-- </div> -->
+             
             </div>
           </div>
         </li>
       </ul>
     </section>
-  </ng-container>
+  </ng-container> 
 
   <!-- process calculator layerwise started -->
   <ng-container
@@ -1387,7 +1406,7 @@
                                   )?.availableUOMs?.length > 0
                                 "
                               >
-                                <select
+                                <select class="bg-light"
                                   tabindex="-1"
                                   *ngIf="
                                     !['Number', 'String'].includes(
@@ -1445,12 +1464,17 @@
                                 </div>
                               </ng-container>
                             </div>
-                            <i
+                          <!--   <i
                               class="cancel_outline_new material-icon"
                               (click)="removeProcessProductAttribute(i, j)"
                             >
                               cancel_outline
-                            </i>
+                            </i> -->
+                               <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProcessProductAttribute(i, j)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                           </div>
                         </div>
                       </ng-container>
@@ -1484,8 +1508,8 @@
                           }"
                           class="my-1"
                         >
-                          <div class="attribute tabular-sheet attr-b">
-                            <div class="attribute-input">
+                          <div class="attribute tabular-sheet d-flex attr-b">
+                            <div class="attribute-input ms-2">
                               <mat-icon
                                 (click)="
                                   onDragClickProcessAttribute(
@@ -1574,12 +1598,17 @@
                                 </button>
                               </div>
                             </div>
-                            <i
+                           <!--  <i
                               (click)="removeProcessProductAttribute(i, j)"
                               class="cancel_outline_new material-icon"
                             >
                               cancel_outline</i
-                            >
+                            > -->
+                               <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProcessProductAttribute(i,j)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                           </div>
                         </div>
                       </ng-container>
@@ -1689,12 +1718,17 @@
                                 </option>
                               </select>
                             </div>
-                            <i
+                         <!--    <i
                               class="cancel_outline_new material-icon"
                               (click)="removeProcessProductAttribute(i, j)"
                             >
                               cancel_outline
-                            </i>
+                            </i> -->
+                              <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProcessProductAttribute(i, j)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                           </div>
                         </div>
                       </ng-container>
@@ -1825,7 +1859,7 @@
                                           )?.availableUOMs?.length > 0
                                         "
                                       >
-                                        <select
+                                        <select class="bg-light"
                                           tabindex="-1"
                                           *ngIf="
                                             !['Number', 'String'].includes(
@@ -1874,7 +1908,7 @@
                                         </div>
                                       </ng-container>
                                     </div>
-                                    <i
+                                  <!--   <i
                                       class="cancel_outline_new material-icon"
                                       (click)="
                                         onDragRemoveProcessAttribute(
@@ -1885,7 +1919,19 @@
                                         )
                                       "
                                       >cancel_outline</i
-                                    >
+                                    > -->
+                                      <dadyin-button matTooltip="Delete" 
+                              (clicked)="
+                                        onDragRemoveProcessAttribute(
+                                          i,
+                                          j,
+                                          attr,
+                                          processProduct?.value.subProductId
+                                        )
+                                      "
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                                   </div>
                                 </div>
                               </ng-container>
@@ -1976,7 +2022,7 @@
                                         </button>
                                       </div>
                                     </div>
-                                    <i
+                                  <!--   <i
                                       (click)="
                                         onDragRemoveProcessAttribute(
                                           i,
@@ -1988,7 +2034,19 @@
                                       class="cancel_outline_new material-icon"
                                     >
                                       cancel_outline
-                                    </i>
+                                    </i> -->
+                                      <dadyin-button matTooltip="Delete" 
+                              (clicked)="
+                                        onDragRemoveProcessAttribute(
+                                          i,
+                                          j,
+                                          attr,
+                                          processProduct?.value.subProductId
+                                        )
+                                      "
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                                   </div>
                                 </div>
                               </ng-container>
@@ -2066,7 +2124,7 @@
                                         </option>
                                       </select>
                                     </div>
-                                    <i
+                                  <!--   <i
                                       class="cancel_outline_new material-icon"
                                       (click)="
                                         onDragRemoveProcessAttribute(
@@ -2078,19 +2136,36 @@
                                       "
                                     >
                                       cancel_outline
-                                    </i>
+                                    </i> -->
+                                      <dadyin-button matTooltip="Delete" 
+                              (clicked)="
+                                        onDragRemoveProcessAttribute(
+                                          i,
+                                          j,
+                                          attr,
+                                          processProduct?.value.subProductId
+                                        )
+                                      "
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                                   </div>
                                 </div>
                               </ng-container>
                             </ng-container>
                           </ng-container>
 
-                          <i
+                         <!--  <i
                             class="cancel_outline_new material-icon"
                             (click)="removeProcessProductAttribute(i, j)"
                           >
                             cancel_outline
-                          </i>
+                          </i> -->
+                            <dadyin-button matTooltip="Delete" 
+                              (clicked)="removeProcessProductAttribute(i, j)"
+                               [theme]="'borderless-danger'"
+          type="image" [typeval]="'assets/nicons/delete.png'">
+        </dadyin-button>
                         </div>
                       </ng-container>
                     </ng-container>
